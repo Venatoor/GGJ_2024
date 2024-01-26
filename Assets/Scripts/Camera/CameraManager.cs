@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+
     private Transform targetTransform;
     public Transform cameraPivot;
     private InputManager inputManager;
 
     private Vector3 cameraFollowVelocity = Vector3.zero;
 
-    public float cameraFollowSpeed = 0.2f;
-    public float cameraLookSpeed = 2f;
-    public float cameraPivotSpeed = 2f;
+    public float cameraFollowSpeed = 0.01f;
+    public float cameraLookSpeed = 0.001f;
+    public float cameraPivotSpeed = 0.001f;
 
     public float pivotMinimumAngle = -35f;
     public float pivotMaximumAngle = 35f;

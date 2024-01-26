@@ -15,6 +15,7 @@ public class Ballon : MonoBehaviour, IInteractable, ISpawnable
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
+        isRendered = true;
     }
 
     public void OnInteract(Collider collision)
@@ -29,7 +30,6 @@ public class Ballon : MonoBehaviour, IInteractable, ISpawnable
 
                 objectRenderer.enabled = false;
                 isRendered = false;
-
                 //Destruction Effect
 
 

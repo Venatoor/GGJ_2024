@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
 
     
     CharacterControl playerControls;
+    AnimationManager animatorManager;
     [SerializeField]
     private Vector2 movementInput;
     private Vector2 cameraInput;
@@ -15,8 +16,16 @@ public class InputManager : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
 
+    private float moveAmount;
+
     public float cameraInputX;
     public float cameraInputY;
+
+    private void Awake()
+    {
+        animatorManager = GetComponent<AnimationManager>();
+
+    }
     private void OnEnable()
     {
         if ( playerControls == null)
@@ -38,6 +47,9 @@ public class InputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimator(0, moveAmount);
+        
 
         cameraInputX = cameraInput.x;
         cameraInputY = cameraInput.y;
