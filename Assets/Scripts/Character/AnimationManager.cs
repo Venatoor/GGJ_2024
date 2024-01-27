@@ -44,7 +44,7 @@ public class AnimationManager : MonoBehaviour
         {
             snappedHorizontal = 0f;
         }
-        #endregion horizontal
+        #endregion horizontal 
         #region vertical
         if (verticalMovement > 0 && verticalMovement < 0.55f)
         {
