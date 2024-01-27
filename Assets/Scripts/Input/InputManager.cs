@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     CharacterControl playerControls;
     AnimationManager animatorManager;
     PlayerLocomotion playerLocomotion;
+
     [SerializeField]
     private Vector2 movementInput;
     private Vector2 cameraInput;
@@ -21,10 +22,12 @@ public class InputManager : MonoBehaviour
     public float cameraInputY;
 
     public bool jumpInput;
+    public bool pauseInput;
     private void Awake()
     {
         animatorManager = GetComponent<AnimationManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        
 
     }
     private void OnEnable()
@@ -37,6 +40,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+            playerControls.PlayerActions.Pause.performed += i => pauseInput = true;
 
             // Enable the controls
             playerControls.Enable();
@@ -63,11 +67,11 @@ public class InputManager : MonoBehaviour
 
 
 
-    public void HandleAllInputs()
+    public void HandleAllInputs(GameManager gm)
     {
         HandleMovementInput();
         HandleJumpInput();
-
+        HandlePauseInput(gm);
 
         // Add logic for other inputs (e.g., jump, interact, dash) here
     }
@@ -78,6 +82,12 @@ public class InputManager : MonoBehaviour
         {
             jumpInput = false;
             playerLocomotion.HandleJumping();
+        }
+    }
+    private void HandlePauseInput(GameManager gm) {
+        if (pauseInput) {
+            pauseInput = false;
+            gm.PauseGame();
         }
     }
 }

@@ -9,12 +9,14 @@ public class Character : MonoBehaviour
     private CameraManager cameraManager;
     private LaughStat laughStat;
     private Animator animator;
+    private GameManager gameManager;
 
     public bool isInteracting;
 
 
     private void InitializeComponents()
     {
+        gameManager = gameObject.AddComponent<GameManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         if ( playerLocomotion == null )
@@ -46,7 +48,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        inputManager.HandleAllInputs();
+        inputManager.HandleAllInputs(gameManager);
     }
 
     private void FixedUpdate()
@@ -56,7 +58,10 @@ public class Character : MonoBehaviour
 
     private void LateUpdate()
     {
-        cameraManager.HandleAllCameraMovement();
+        if (!gameManager.GetPaused()) {
+            cameraManager.HandleAllCameraMovement();
+        }
+
         isInteracting = animator.GetBool("isInteracting");
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);

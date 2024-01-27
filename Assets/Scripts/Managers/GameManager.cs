@@ -18,11 +18,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
     }
+
+    public bool GetPaused() {
+        return isPaused;
+    }
+
     private void ResetGame()
     {
         isPaused = false;
