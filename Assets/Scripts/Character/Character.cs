@@ -33,7 +33,8 @@ public class Character : MonoBehaviour
         {
             laughStat = gameObject.AddComponent<LaughStat>();
         }
-        animator = GetComponent<Animator>();
+        laughStat.SetMaxAmount(100f);
+        laughStat.SetAmount(50f);
     }
 
     private void Awake()
