@@ -1865,7 +1865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10.9, y: 21}
+  m_AnchoredPosition: {x: 10.900024, y: 21}
   m_SizeDelta: {x: 136.1169, y: 87.6293}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2025020012
@@ -2015,8 +2015,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clown
       objectReference: {fileID: 0}
-    - target: {fileID: 3117458935131556636, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
-      propertyPath: m_Mass
+    - target: {fileID: 3117458935131556632, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
+      propertyPath: inAirTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117458935131556632, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
+      propertyPath: fallingVelocity
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117458935131556632, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
+      propertyPath: leapingVelocity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117458935131556632, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
+      propertyPath: groundLayer.m_Bits
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3227331743251901685, guid: 7c104263f342e5a4cb5b2f135cbd829b, type: 3}
