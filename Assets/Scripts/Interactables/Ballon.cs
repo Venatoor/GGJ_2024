@@ -28,7 +28,7 @@ public class Ballon : MonoBehaviour, IInteractable, ISpawnable
                 LaughStat laughStat = character.GetComponent<LaughStat>();
                 laughStat.Increase(amountToGive);
 
-                objectRenderer.enabled = false;
+                gameObject.SetActive(false);
                 isRendered = false;
                 //Destruction Effect
 
