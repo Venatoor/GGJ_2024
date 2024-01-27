@@ -8,6 +8,11 @@ public class Character : MonoBehaviour
     private InputManager inputManager;
     private CameraManager cameraManager;
     private LaughStat laughStat;
+    private Animator animator;
+
+    public bool isInteracting;
+
+
     private void InitializeComponents()
     {
         cameraManager = FindObjectOfType<CameraManager>();
@@ -28,6 +33,7 @@ public class Character : MonoBehaviour
         {
             laughStat = gameObject.AddComponent<LaughStat>();
         }
+        animator = GetComponent<Animator>();
     }
 
     private void Awake()
@@ -49,5 +55,11 @@ public class Character : MonoBehaviour
     private void LateUpdate()
     {
         cameraManager.HandleAllCameraMovement();
+        isInteracting = animator.GetBool("isInteracting");
+        playerLocomotion.isJumping = animator.GetBool("isJumping");
+        animator.SetBool("isGrounded", playerLocomotion.isGrounded);
     }
+
+
+   
 }
