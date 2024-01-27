@@ -21,6 +21,7 @@ public class LaughStat : Stat
     void Update()
     {
         DiminishStat();
+        //Debug.Log(currentAmount);
     }
 
 
@@ -28,7 +29,10 @@ public class LaughStat : Stat
     {
         if (canDiminsh)
         {
-            currentAmount -= Mathf.Clamp(Time.deltaTime, 0, maxAmount);
+            currentAmount -= 7 * Mathf.Clamp(Time.deltaTime, 0, maxAmount);
+            currentAmount = Mathf.Clamp(currentAmount, 0, maxAmount);
+
+
         }
     }
 }

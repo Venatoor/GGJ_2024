@@ -28,6 +28,8 @@ public class Character : MonoBehaviour
         {
             laughStat = gameObject.AddComponent<LaughStat>();
         }
+        laughStat.SetMaxAmount(100f);
+        laughStat.SetAmount(50f);
     }
 
     private void Awake()

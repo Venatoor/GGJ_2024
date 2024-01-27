@@ -5,26 +5,21 @@ using UnityEngine;
 public class Neelde : MonoBehaviour
 {
     public RectTransform uiElement;
-    public float rotationValue;
+    public Character character;
     public float rotationSpeed = 5f;
-    public float minRotation = -55f;
+    public float minRotation = -50f;
     public float maxRotation = 50f;
-    private float timer = 1f; 
 
+    private float rotationValue;
+    private LaughStat laughStat;
 
+    void Start() {
+        laughStat = character.GetComponent<LaughStat>();
+    }
     void Update()
     {
 
-        // Update the timer
-        timer -= Time.deltaTime;
-
-        // Decrease the rotation value every second
-        if (timer <= 0f)
-        {
-            rotationValue = Mathf.Max(minRotation, rotationValue + 3); // Adjust the decrement value
-            timer = 1f; // Reset the timer
-        }
-
+        rotationValue = -1 * (laughStat.GetAmount() - 50);
         // Assuming you want to rotate around the Z-axis
         rotationValue = Mathf.Clamp(rotationValue, minRotation, maxRotation);
 

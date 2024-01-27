@@ -19,6 +19,15 @@ public abstract class Stat : MonoBehaviour
         currentAmount -= Mathf.Clamp(amount, 0, maxAmount);
     }
 
+    public void SetAmount(float amount)
+    {
+        currentAmount = amount;
+    }
+    public float GetAmount()
+    {
+        return currentAmount;
+    }
+
     public void FullRegen()
     {
         currentAmount = maxAmount;
@@ -33,5 +42,6 @@ public abstract class Stat : MonoBehaviour
     {
         this.maxAmount = maxAmount;
     }
+
 
 }
