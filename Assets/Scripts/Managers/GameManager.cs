@@ -7,14 +7,89 @@ public class GameManager : MonoBehaviour
 
     GameState gameState;
     bool isPaused;
+    InputManager inputManager;
+
+    private int ballonNumbers;
+    private LevelManager levelManager;
+    private Stat laughingStat;
+
+    public int currentBallons;
+
+    private bool gameIsRuning ;
+
+    //SFX
+    private AudioSource backgroundMusic;
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioSource randomLaughsSFX;
 
     public enum GameState
     {
         UI, INGAME
     }
 
+    private void Awake()
+    {
+
+        DontDestroyOnLoad(this);
+
+        InitializeGame();
+
+        audioManager = FindObjectOfType<AudioManager>();
+        Character player = FindObjectOfType<Character>();
+        inputManager = player.GetComponent<InputManager>();
+        laughingStat = player.GetComponent<LaughStat>();
+        FetchBallonNumbers();
+    }
+
+    private void FetchBallonNumbers()
+    {
+        MainPickUps[] ballons = FindObjectsOfType<MainPickUps>();
+        ballonNumbers = ballons.Length;
+        print(ballonNumbers);
+    }
+
+    private void InitializeGame()
+    {
+        gameIsRuning = true;
+        audioManager.playAudio(backgroundMusic);
+        gameState = GameState.UI;
+        PauseGame();
+    }
+
+    private void Update()
+    {
+        if ( gameState == GameState.INGAME )
+        {
+            inputManager.HandlePauseInput(this);
+        }
+        HandleGameDefeatCondition();
+        HandleGameWonCondition();
+
+        Invoke("RandomLaughs", 90f);
+    }
+
+    public void SwitchGameManageState()
+    {
+        if (gameIsRuning)
+        {
+            switch (gameState)
+            {
+                case (GameState.INGAME):
+                    ResetGame();
+                    gameState = GameState.UI;
+                    break;
+                case (GameState.UI):
+                    PauseGame();
+                    gameState = GameState.INGAME;
+                    break;
+            }
+        }
+    }
+
     private void OnLaunch()
     {
+        //Show UI 
 
     }
 
@@ -33,23 +108,42 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
     }
-    private void OnGameDefeated()
+    private void HandleGameDefeatCondition()
     {
+        if ( laughingStat.GetCurrentAmount() <= 0 && gameIsRuning )
+        {
+            EndGame();
 
+        }
     }
 
-    private void OnGameWon()
+    private void HandleGameWonCondition()
     {
-
+        if (currentBallons == ballonNumbers && gameIsRuning )
+        {
+            EndGame();
+        }
     }
 
-    private void StartGame()
-    {
 
+    private void EndGame()
+    {
+        gameIsRuning = false;
+        PauseGame();
     }
 
-    private void PrepareGame()
+    private void RandomLaughs()
     {
+        AudioManager.instance.playAudio(randomLaughsSFX);
+    }
 
+    private void SetNumberOfBallons(int numberOfBallons)
+    {
+        ballonNumbers = numberOfBallons;
+    }
+
+    public void IncrementNumberOfBallons()
+    {
+        currentBallons++;
     }
 }

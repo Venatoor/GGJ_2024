@@ -43,5 +43,10 @@ public abstract class Stat : MonoBehaviour
         this.maxAmount = maxAmount;
     }
 
+    public float GetCurrentAmount()
+    {
+        return currentAmount;
+    }
+
 
 }

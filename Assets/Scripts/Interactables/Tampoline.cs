@@ -7,6 +7,19 @@ public class Tampoline : MonoBehaviour
     public GameObject trampoline;
     private Animator animator;
 
+    [SerializeField]
+    private AudioSource tampolineSFX;
+
+
+    [SerializeField]
+    private float forceAmountX;
+
+    [SerializeField]
+    private float forceAmountY;
+
+    [SerializeField]
+    private float forceAmountZ;
+
     public void Start()
     {
         animator = trampoline.GetComponent<Animator>();
@@ -26,7 +39,8 @@ public class Tampoline : MonoBehaviour
     }
     void ApplyTrampolineForce(Rigidbody playerRigidbody)
     {
-        Vector3 trampolineForce = new Vector3(0f, 700f, 0f);
+        AudioManager.instance.playAudio(tampolineSFX);
+        Vector3 trampolineForce = new Vector3(forceAmountX, forceAmountY, forceAmountZ);
         playerRigidbody.AddForce(trampolineForce, ForceMode.Acceleration);
     }
 
