@@ -10,7 +10,9 @@ public class Character : MonoBehaviour
     private LaughStat laughStat;
     private Animator animator;
     private GameManager gameManager;
+    public float scaleDownFactor;
 
+    private bool isInCanon;
     public bool isInteracting;
 
 
@@ -38,6 +40,23 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
         laughStat.SetMaxAmount(100f);
         laughStat.SetAmount(50f);
+    }
+
+    public bool GetIsInCanon() {
+        return isInCanon;
+    }
+
+    public void SetInCanonTrue()
+    {
+        this.isInCanon = true ;
+    }
+    public void SetInCanonFalse()
+    {
+        this.isInCanon = false;
+    }
+
+    public void SetIsjumping() {
+        
     }
 
     private void Awake()

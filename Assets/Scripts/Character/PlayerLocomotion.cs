@@ -176,4 +176,17 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
+    public void HandleEject()
+    {
+
+        animationManager.animator.SetBool("isJumping", true);
+        animationManager.PlayTargetAnimation("Jump", false);
+        float jumpingVelocity = 3 * Mathf.Sqrt(-2 * gravity * height);
+        Vector3 playerVelocity = moveDirection;
+        playerVelocity.y = jumpingVelocity;
+        playerRigidBody.velocity = playerVelocity;
+
+    
+    }
+
 }
