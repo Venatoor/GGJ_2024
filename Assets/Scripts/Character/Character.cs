@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
 
     private void InitializeComponents()
     {
-        gameManager = gameObject.AddComponent<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         if ( playerLocomotion == null )

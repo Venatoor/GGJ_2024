@@ -15,6 +15,9 @@ public class SlowInteractible : MonoBehaviour, IInteractable, ISpawnable
     private float slowDuration;
     PlayerLocomotion playerLocomotion;
 
+    [SerializeField]
+    private AudioSource slowSFX;
+
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
@@ -31,7 +34,7 @@ public class SlowInteractible : MonoBehaviour, IInteractable, ISpawnable
             {
 
                 //checking if slow amount is correctly clamped
-
+                AudioManager.instance.playAudio(slowSFX);
                 float slowAmountClamped = Mathf.Clamp01(slowAmount);
                 playerLocomotion.SetSpeedFactor(slowAmountClamped);
                 StartCoroutine(SpeedReset());

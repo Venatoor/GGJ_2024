@@ -84,10 +84,10 @@ public class InputManager : MonoBehaviour
             playerLocomotion.HandleJumping();
         }
     }
-    private void HandlePauseInput(GameManager gm) {
+    public void HandlePauseInput(GameManager gm) {
         if (pauseInput) {
             pauseInput = false;
-            gm.PauseGame();
+            gm.SwitchGameManageState();
         }
     }
 }

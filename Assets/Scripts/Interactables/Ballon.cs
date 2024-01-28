@@ -11,6 +11,9 @@ public class Ballon : MonoBehaviour, IInteractable, ISpawnable
 
     [SerializeField]
     private float amountToGive;
+
+    [SerializeField]
+    private AudioSource ballonExplosionSFX;
     // Start is called before the first frame update
     private void Start()
     {
@@ -28,6 +31,7 @@ public class Ballon : MonoBehaviour, IInteractable, ISpawnable
                 LaughStat laughStat = character.GetComponent<LaughStat>();
                 laughStat.Increase(amountToGive);
 
+                AudioManager.instance.playAudio(ballonExplosionSFX);
                 gameObject.SetActive(false);
                 isRendered = false;
                 //Destruction Effect
