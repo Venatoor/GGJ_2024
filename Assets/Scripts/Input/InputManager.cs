@@ -122,6 +122,15 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void HandlePauseInput(GameManager gm)
+    {
+        if (pauseInput)
+        {
+            pauseInput = false;
+            gm.SwitchGameManageState();
+        }
+    }
+
 
     private void ScaleUpObject()
     {

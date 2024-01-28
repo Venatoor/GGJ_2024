@@ -5,9 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+
     GameState gameState;
     bool isPaused;
     InputManager inputManager;
+
+    public GameObject victory;
+    public GameObject defeat;
+    public GameObject Start;
+
 
     private int ballonNumbers;
     private LevelManager levelManager;
@@ -18,10 +24,10 @@ public class GameManager : MonoBehaviour
     private bool gameIsRuning ;
 
     //SFX
-    private AudioSource backgroundMusic;
+    public AudioSource randomLaughsSFX;
+    public AudioSource backgroundMusic;
     private AudioManager audioManager;
     [SerializeField]
-    private AudioSource randomLaughsSFX;
 
     public enum GameState
     {
@@ -55,6 +61,7 @@ public class GameManager : MonoBehaviour
         audioManager.playAudio(backgroundMusic);
         gameState = GameState.UI;
         PauseGame();
+        ShowUi(Start);
     }
 
     private void Update()
@@ -90,7 +97,18 @@ public class GameManager : MonoBehaviour
     private void OnLaunch()
     {
         //Show UI 
+        ShowUi(Start);
+    }
 
+    public void ShowUi(GameObject uiToShow) {
+        DisableAllUi();
+        uiToShow.SetActive(true);
+
+    }
+    public void DisableAllUi() {
+        victory.SetActive(false);
+        defeat.SetActive(false);
+        Start.SetActive(false);
     }
 
     public void PauseGame()
@@ -112,8 +130,8 @@ public class GameManager : MonoBehaviour
     {
         if ( laughingStat.GetCurrentAmount() <= 0 && gameIsRuning )
         {
+            ShowUi(defeat);
             EndGame();
-
         }
     }
 
@@ -121,6 +139,8 @@ public class GameManager : MonoBehaviour
     {
         if (currentBallons == ballonNumbers && gameIsRuning )
         {
+            ShowUi(victory);
+
             EndGame();
         }
     }
